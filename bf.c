@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include "interpreter.h"
+
+void help();
 
 int main(int argc, char *argv[]) {
   FILE *program_file = NULL;
@@ -16,6 +19,8 @@ int main(int argc, char *argv[]) {
     if ((c = getopt(argc, argv, "ho:i:d:")) != -1) {
       switch (c) {
         case 'h':
+          help(argv[0]);
+          exit(0);
           break;
         case 'o':
           out = fopen(optarg, "w");
@@ -69,4 +74,18 @@ int main(int argc, char *argv[]) {
 
   if(custom_in) fclose(in);
   if(custom_out) fclose(out);
+}
+
+void help(char *program_name) {
+  printf("Usage: %s "
+  "[-h] [-oid <filename>] "
+  "filename"
+  "\n",
+  program_name);
+
+  printf(
+  " -h             view this help message\n"
+  " -i <filename>  stdin file\n"
+  " -o <filename>  stdout file\n"
+  " -d <dilename>  dump cleaned brainfuck instructions\n");
 }
