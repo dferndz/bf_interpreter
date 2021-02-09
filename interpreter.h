@@ -7,12 +7,14 @@
 #define true 1
 #define false 0
 
+#define ADD_METRICS 0x1
+
 typedef unsigned char bool;
 typedef unsigned char byte_t;
 
 void load_program(FILE*);
 void unload_program();
-void run(FILE* in, FILE* out);
+void run(FILE* in, FILE* out, byte_t opts);
 void cli(FILE *in, FILE *out);
 void dump_instructions(FILE *);
 bool is_program_valid();

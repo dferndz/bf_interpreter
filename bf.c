@@ -14,9 +14,10 @@ int main(int argc, char *argv[]) {
   bool custom_out = false;
   bool program_file_loaded = false;
   char c;
+  byte_t opts = 0;
   
   while (optind < argc) {
-    if ((c = getopt(argc, argv, "ho:i:d:")) != -1) {
+    if ((c = getopt(argc, argv, "ho:i:d:m")) != -1) {
       switch (c) {
         case 'h':
           help(argv[0]);
@@ -32,6 +33,9 @@ int main(int argc, char *argv[]) {
           break;
         case 'd':
           program_dump = fopen(optarg, "w");
+          break;
+        case 'm':
+          opts |= ADD_METRICS;
           break;
       }
     } else {
@@ -60,7 +64,7 @@ int main(int argc, char *argv[]) {
           dump_instructions(program_dump);
           fclose(program_dump);
         }
-        run(in, out);
+        run(in, out, opts);
       }
       else printf("Invalid syntax: brackets '[' ']' are not balanced.\n");
     
@@ -78,13 +82,14 @@ int main(int argc, char *argv[]) {
 
 void help(char *program_name) {
   printf("Usage: %s "
-  "[-h] [-oid <filename>] "
+  "[-hm] [-oid <filename>] "
   "filename"
   "\n",
   program_name);
 
   printf(
   " -h             view this help message\n"
+  " -m             print program metrics\n"
   " -i <filename>  stdin file\n"
   " -o <filename>  stdout file\n"
   " -d <dilename>  dump cleaned brainfuck instructions\n");

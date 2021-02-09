@@ -16,6 +16,7 @@ static byte_t *instruction_stack;
 static size_t ins_stack_size;
 static byte_t *buffer;
 
+size_t total_ins;
 int depth;
 byte_t *ip;
 byte_t *sp;
@@ -120,6 +121,15 @@ static bool is_valid_char(char c) {
   return false;
 }
 
+static void print_metrics(FILE *out) {
+  fprintf(out, 
+  "------------------------------------\n"
+  "Total instructions loaded:   %ld\n"
+  "Total instructions executed: %ld\n"
+  "------------------------------------\n",
+  ins_stack_size, total_ins);
+}
+
 bool is_program_valid() {
   byte_t *p = instruction_stack;
   int d = 0;
@@ -164,6 +174,7 @@ void load_program(FILE *program) {
   free(buffer);
   ip = instruction_stack;
   sp = data_stack;
+  total_ins = 0;
   depth = 0;
 }
 
@@ -171,8 +182,9 @@ void unload_program() {
   free(instruction_stack);
 }
 
-void run(FILE *in, FILE *out) {
+void run(FILE *in, FILE *out, byte_t opts) {
   while(*(ip) != '\0') {
+    total_ins++;
     switch(*ip) {
       case INC:
         b_inc();
@@ -202,4 +214,6 @@ void run(FILE *in, FILE *out) {
         b_next_ins();
     }
   }
+
+  if(opts & ADD_METRICS) print_metrics(out);
 }
