@@ -2,7 +2,7 @@
 >++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++				c2v61 : ASCII code of =
 >++++++++++						c3v10 : ASCII code of EOL
->+++++++						c4v7  : quantity of numbers to be calculated
+>++++++					c4v7  : quantity of numbers to be calculated
 >							c5v0  : current number (one digit)
 >+							c6v1  : current value of factorial (up to three digits)
 <<							c4    : loop counter
