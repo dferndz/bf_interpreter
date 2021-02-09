@@ -127,6 +127,8 @@ bool is_program_valid() {
   for(;(size_t)p < (size_t) instruction_stack + ins_stack_size; p++) {
     if(*p == LSTART) d++;
     if(*p == LEND) d--;
+
+    if(d < 0) return false;
   }
 
   return !d;
