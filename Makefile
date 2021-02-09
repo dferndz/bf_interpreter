@@ -12,3 +12,6 @@ all: $(OBJS)
 clean:
 	rm -f *.o
 	rm $(OUTPUT)
+
+install: all
+	sudo cp bf /usr/local/bin/
