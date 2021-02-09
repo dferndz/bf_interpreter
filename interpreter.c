@@ -126,8 +126,9 @@ static void print_metrics(FILE *out) {
   "------------------------------------\n"
   "Total instructions loaded:   %ld\n"
   "Total instructions executed: %ld\n"
+  "Interpreter: %s %s\n"
   "------------------------------------\n",
-  ins_stack_size, total_ins);
+  ins_stack_size, total_ins, _BF_INTERPRETER_, _BF_INTERPRETER_VERSION_);
 }
 
 bool is_program_valid() {

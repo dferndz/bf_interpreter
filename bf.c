@@ -81,11 +81,12 @@ int main(int argc, char *argv[]) {
 }
 
 void help(char *program_name) {
-  printf("Usage: %s "
+  printf("%s %s\n"
+  "Usage: %s "
   "[-hm] [-oid <filename>] "
   "filename"
   "\n",
-  program_name);
+  _BF_INTERPRETER_, _BF_INTERPRETER_VERSION_, program_name);
 
   printf(
   " -h             view this help message\n"

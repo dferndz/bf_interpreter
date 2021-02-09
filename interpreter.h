@@ -3,6 +3,9 @@
 
 #include <stdio.h>
 
+#define _BF_INTERPRETER_ "BF Interpreter"
+#define _BF_INTERPRETER_VERSION_ "0.1.0"
+
 #define DATA_STACK_SIZE 30000
 #define true 1
 #define false 0
